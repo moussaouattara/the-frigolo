@@ -1,16 +1,65 @@
 package com.example.frigolo;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
+
+//    private TextView mTextMessage;
+    private static FragmentHome fHome =new FragmentHome();
+    private static FragmentSetting fSetting =new FragmentSetting();
+    private static FragmentFridge fFridge =new FragmentFridge();
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_scan:
+//                    mTextMessage.setText(R.string.title_scan);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
+                    return true;
+                case R.id.navigation_myfridge:
+//                    mTextMessage.setText(R.string.title_myfridge);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment, fFridge).commit();
+                    return true;
+                case R.id.navigation_setting:
+//                    mTextMessage.setText(R.string.title_setting);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment, fSetting).commit();
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
-    public void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        setContentView(R.layout.main_activity);
-        BD db = new BD(this);
-        db.save(new Aliment("Pâtes", "Féculent", "1234567891234"));
-        db.save(new Aliment("Jambon", "Viande", "1234567891235"));
-        db.save(new Aliment("Fromage blanc", "Fromage", "1234567891236"));
-    }}
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+//        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        MenuItem i=(MenuItem) findViewById(R.id.navigation);
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
+
+
+
+
+    }
+
+
+}
