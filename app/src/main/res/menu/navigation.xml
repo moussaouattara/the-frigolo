@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_incon_barcode"
+        android:title="@string/title_scan" />
+    <item
+        android:id="@+id/navigation_myfridge"
+        android:icon="@drawable/ic_incon_fridge"
+        android:title="@string/title_myfridge" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_incon_setting"
+        android:title="@string/title_setting" />
+
+</menu>

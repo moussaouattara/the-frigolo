@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Frigolo</string>
+    <string name="app_name">Le Frigolo</string>
+    <string name="title_scan">Scan product</string>
+    <string name="title_myfridge">My Fridge</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_setting">Settings</string>
 </resources>
