@@ -4,4 +4,7 @@
     <string name="title_myfridge">My Fridge</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_setting">Settings</string>
+    <string name="welcome_frigolo">Welcome to</string>
+    <string name="setting_notification">Noifications</string>
+    <string name="seting_database">Database</string>
 </resources>

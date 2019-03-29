@@ -1,6 +1,7 @@
 package com.example.frigolo;
 
 import android.os.Bundle;
+import java.util.concurrent.TimeUnit;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_scan:
 //                    mTextMessage.setText(R.string.title_scan);
-                    getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
                     return true;
                 case R.id.navigation_myfridge:
 //                    mTextMessage.setText(R.string.title_myfridge);
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -53,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        MenuItem i=(MenuItem) findViewById(R.id.navigation);
-        getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
+       getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
 
 
 
