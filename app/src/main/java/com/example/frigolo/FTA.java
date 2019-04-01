@@ -2,25 +2,25 @@ package com.example.frigolo;
 
 class FTA {
 
-    private Integer aliment_id;
-    private Integer fridge_id;
+    private String fridge_name;
+    private String aliment_name;
     private Integer quantity;
     private String date;
 
-    public FTA(Integer aliment_id, Integer fridge_id, Integer quantity, String date) {
-        this.aliment_id = aliment_id;
-        this.fridge_id = fridge_id;
+    FTA(String fridge_name, String aliment_name, Integer quantity, String date) {
+        this.aliment_name = aliment_name;
+        this.fridge_name = fridge_name;
         this.quantity = quantity;
         this.date = date; }
 
-    public Integer getAlimentId() {
-        return this.aliment_id; }
+    String getAlimentName() {
+        return this.aliment_name; }
 
-    public Integer getFridgeId() {
-        return this.fridge_id; }
+    String getFridgeName() {
+        return this.fridge_name; }
 
-    public Integer getQuantite() {
+    Integer getQuantite() {
         return this.quantity; }
 
-    public String getDate() {
+    String getDate() {
         return this.date; }}

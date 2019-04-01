@@ -3,15 +3,8 @@ package com.example.frigolo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
     private static FragmentHome fHome =new FragmentHome();
     private static FragmentSetting fSetting =new FragmentSetting();
     private static FragmentFridge fFridge =new FragmentFridge();
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem i=(MenuItem) findViewById(R.id.navigation);
         getFragmentManager().beginTransaction().replace(R.id.fragment, fHome).commit();
 
-
+        BD db = new BD(this);
 
 
     }

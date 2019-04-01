@@ -5,12 +5,12 @@ class Fridge {
     private String name;
     private String type;
 
-    public Fridge(String name, String type) {
+    Fridge(String name, String type) {
         this.name = name;
         this.type = type; }
 
-    public String getName() {
+    String getName() {
         return this.name; }
 
-    public String getType() {
+    String getType() {
         return this.type; }}
