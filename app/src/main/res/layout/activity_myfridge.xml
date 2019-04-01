@@ -2,22 +2,44 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MyFridge"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="36sp"
+    <ListView
+        android:id="@+id/fridgelist"
+        android:layout_width="395dp"
+        android:layout_height="454dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGoAdd"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/fridgelist" />
+
+    <Button
+        android:id="@+id/buttonGoAdd"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="254dp"
+        android:layout_marginLeft="254dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginRight="43dp"
+        android:onClick="goAddFridge"
+        android:text="Add a Fridge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
