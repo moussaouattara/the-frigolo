@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -101,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void addfridge(View view){
-
-
-
         EditText name = (EditText) findViewById(R.id.fridge_add_type);
         EditText type = (EditText) findViewById(R.id.fridge_add_name);
 

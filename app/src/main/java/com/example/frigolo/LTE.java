@@ -2,20 +2,20 @@ package com.example.frigolo;
 
 class LTE {
 
-    private Integer element_id;
-    private Integer list_id;
+    private String list_name;
+    private String element_name;
     private Boolean done;
 
-    public LTE(Integer element_id, Integer list_id, Boolean done) {
-        this.element_id = element_id;
-        this.list_id = list_id;
+    LTE(String list_name, String element_name, Boolean done) {
+        this.element_name = element_name;
+        this.list_name = list_name;
         this.done = done; }
 
-    public Integer getElementId() {
-        return element_id; }
+    String getElementName() {
+        return this.element_name; }
 
-    public Integer getListId() {
-        return list_id; }
+    String getListName() {
+        return this.list_name; }
 
-    public Boolean getDone() {
+    Boolean getDone() {
         return this.done; }}

@@ -4,7 +4,6 @@ public class Fridge {
 
     private String name;
     private String type;
-    private int id;
 
     public Fridge(String name,String type) {
         this.name = name;
@@ -17,17 +16,11 @@ public class Fridge {
     public String getName() {
         return this.name; }
 
-    public int getId() {
-        return this.id; }
-
     public void setName(String name){
         this.name=name;
     }
     public void setType(String type){
         this.type=type;
-    }
-    public void setId(int id){
-        this.id=id;
     }
 
     public String getType() {
