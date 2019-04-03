@@ -9,19 +9,14 @@ public class Fridge {
         this.name = name;
         this.type = type; }
 
-    public Fridge(){
-
-    }
-
     public String getName() {
         return this.name; }
 
-    public void setName(String name){
-        this.name=name;
-    }
-    public void setType(String type){
-        this.type=type;
-    }
 
     public String getType() {
-        return this.type; }}
+        return this.type; }
+
+    public String toString(){
+        return this.name+" : "+this.type;
+    }
+}

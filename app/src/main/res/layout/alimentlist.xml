@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/alimentname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="32dp"
+        android:text="Aliment's Name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alimentquantite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="Aliment's Quantity"
+        app:layout_constraintBottom_toBottomOf="@+id/alimentname"
+        app:layout_constraintStart_toEndOf="@+id/alimentname"
+        app:layout_constraintTop_toTopOf="@+id/alimentname"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/alimentdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="Date"
+        app:layout_constraintBottom_toBottomOf="@+id/alimentquantite"
+        app:layout_constraintStart_toEndOf="@+id/alimentquantite"
+        app:layout_constraintTop_toTopOf="@+id/alimentquantite"
+        app:layout_constraintVertical_bias="0.0" />
+</android.support.constraint.ConstraintLayout>

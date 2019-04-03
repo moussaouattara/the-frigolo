@@ -1,26 +1,20 @@
 package com.example.frigolo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private static FragmentFridge fFridge =new FragmentFridge();
     private static FragmentFridgeAdd fFridgeA = new FragmentFridgeAdd();
     private static FragmentFridgeView fFridgeV = new FragmentFridgeView();
+    private static FragmentFridgeViewAliment fFridgeAV = new FragmentFridgeViewAliment();
+
 
 
 
@@ -88,24 +84,66 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void goViewFridgeAliment(ArrayList<FTA> ftalist){
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeAV).commit();
+        try {
+            ArrayList<FTA> isialiment = new ArrayList<FTA>();
+
+            this.listcontent=(ListView) findViewById(R.id.listaliment);
+            isialiment.clear();
+            BD databaseHandler = new BD(MainActivity.getAppContext());
+
+            for (int p = 0; p < ftalist.size(); p++) {
+                FTA baris = ftalist.get(p);
+                isialiment.add(baris);
+            }
+            Log.e("Info :","Try to adapt");
+            FTAAdapter datakamus = new FTAAdapter(MainActivity.getAppContext(), isialiment);
+            listcontent.setAdapter(datakamus);
+        }catch (java.lang.NullPointerException e){
+
+        }
+
+    }
+
+    AdapterView.OnItemClickListener myhandler = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            try {
+                BD db = new BD(getAppContext());
+                Fridge fridge = (Fridge) parent.getItemAtPosition(position);
+                ArrayList<FTA> ftalist = db.getOneFTA(fridge.getName());
+                goViewFridgeAliment(ftalist);
+                TextView fname = (TextView) findViewById(R.id.aliment_add_fname);
+                fname.setText(fridge.getName());
+
+
+            }catch (java.lang.NullPointerException e){
+
+            }
+        }
+
+
+    };
 
     public void goViewFridge(View view){
         getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeV).commit();
         tampilFridge();
+
 
     }
 
 
 
     public void addfridge(View view){
-        EditText name = (EditText) findViewById(R.id.fridge_add_type);
-        EditText type = (EditText) findViewById(R.id.fridge_add_name);
+        EditText name = (EditText) findViewById(R.id.fridge_add_name);
+        EditText type = (EditText) findViewById(R.id.fridge_add_type);
 
         Log.e("EditView", String.valueOf(name));
         Log.e("EditView", String.valueOf(type));
 
         if (name.getText().toString().matches("") || type.getText().toString().matches("")) {
-            Toast.makeText(this,"Enter value",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Enter values",Toast.LENGTH_LONG).show();
         }
         else {
             try {
@@ -113,7 +151,34 @@ public class MainActivity extends AppCompatActivity {
                 db.save(new Fridge(name.getText().toString(), type.getText().toString()));
             }
             catch (SQLiteConstraintException e){
-                Toast.makeText(this,"Name already pick",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Aliment Name already pick",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+    }
+
+    public void addAlimentsandfta(View view){
+        EditText aname = (EditText) findViewById(R.id.n);
+        EditText aquantite = (EditText) findViewById(R.id.b);
+        EditText adate = (EditText) findViewById(R.id.aliment_add_date);
+        TextView fname = (TextView) findViewById(R.id.aliment_add_fname);
+
+        if (aname.getText().toString().matches("") || aquantite.getText().toString().matches("")) {
+            Toast.makeText(this,"Enter values",Toast.LENGTH_LONG).show();
+        }
+        else {
+            try {
+                BD db = new BD(this);
+                db.save(new FTA(fname.getText().toString(),aname.getText().toString(), Integer.parseInt(aquantite.getText().toString()),adate.getText().toString()));
+                if (db.getOneAliment(aname.getText().toString())==null){
+                    db.save(new Aliment(aname.getText().toString(),null,null));
+                }
+                goViewFridgeAliment(db.getOneFTA(fname.getText().toString()));
+            }
+            catch (SQLiteConstraintException e){
+                Toast.makeText(this,"Aliment Name already pick",Toast.LENGTH_LONG).show();
             }
 
 
@@ -121,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     public void tampilFridge() {
         // TODO Auto-generated method stub
         try {
@@ -135,18 +199,18 @@ public class MainActivity extends AppCompatActivity {
 
 
             for (int p = 0; p < data.size(); p++) {
-                komponenfridge = new Fridge();
                 Fridge baris = data.get(p);
-                Log.e("baris", baris.getName());
-                Log.e("baris", baris.getType());
-                komponenfridge.setName(baris.getType());
-                komponenfridge.setType(baris.getName());
-                komponenfridge.setId(baris.getId());
+                komponenfridge = new Fridge(baris.getName(),baris.getType());
+                Log.i("baris", baris.getName());
+                Log.i("baris", baris.getType());
+                Log.i("Frigo",baris.toString());
+
                 isifridge.add(komponenfridge);
             }
             Log.e("Info :","Try to adapt");
             FridgeAdapter datakamus = new FridgeAdapter(MainActivity.getAppContext(), isifridge);
             listcontent.setAdapter(datakamus);
+            listcontent.setOnItemClickListener(myhandler);
         }catch (java.lang.NullPointerException e){
 
         }
