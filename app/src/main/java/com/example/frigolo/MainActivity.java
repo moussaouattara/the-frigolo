@@ -2,6 +2,7 @@ package com.example.frigolo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private static FragmentSetting fSetting =new FragmentSetting();
     private static FragmentFridge fFridge =new FragmentFridge();
     private static FragmentFridgeAdd fFridgeA = new FragmentFridgeAdd();
+    private static FragmentFridgeView fFridgeV = new FragmentFridgeView();
 
-    Fridge komponenfridge;
-    ArrayList<Fridge> isifridge = new ArrayList<Fridge>();
+
 
     private ListView listcontent;
 
@@ -49,9 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_myfridge:
 //                    mTextMessage.setText(R.string.title_myfridge);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeV).commit();
                     tampilFridge();
-                    getFragmentManager().beginTransaction().replace(R.id.fragment, fFridge).commit();
-
                     return true;
                 case R.id.navigation_setting:
 //                    mTextMessage.setText(R.string.title_setting);
@@ -91,10 +91,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addfirdge(View view){
 
-        EditText name = (EditText) findViewById(R.id.fridge_type);
-        EditText type = (EditText) findViewById(R.id.fridge_name);
+    public void goViewFridge(View view){
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeV).commit();
+        tampilFridge();
+
+    }
+
+
+
+    public void addfridge(View view){
+
+
+
+        EditText name = (EditText) findViewById(R.id.fridge_add_type);
+        EditText type = (EditText) findViewById(R.id.fridge_add_name);
 
         Log.e("EditView", String.valueOf(name));
         Log.e("EditView", String.valueOf(type));
@@ -103,8 +114,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Enter value",Toast.LENGTH_LONG).show();
         }
         else {
-            BD db = new BD(this);
-            db.save(new Fridge(name.getText().toString(), type.getText().toString()));
+            try {
+                BD db = new BD(this);
+                db.save(new Fridge(name.getText().toString(), type.getText().toString()));
+            }
+            catch (SQLiteConstraintException e){
+                Toast.makeText(this,"Name already pick",Toast.LENGTH_LONG).show();
+            }
+
 
         }
 
@@ -114,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
     public void tampilFridge() {
         // TODO Auto-generated method stub
         try {
-            this.listcontent=(ListView) findViewById(R.id.fridgelist);
+            Fridge komponenfridge;
+            ArrayList<Fridge> isifridge = new ArrayList<Fridge>();
+
+            this.listcontent=(ListView) findViewById(R.id.fridge_list);
             isifridge.clear();
             BD databaseHandler = new BD(MainActivity.getAppContext());
             ArrayList<Fridge> data = (ArrayList<Fridge>) databaseHandler.getAllFridge();

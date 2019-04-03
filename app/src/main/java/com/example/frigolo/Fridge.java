@@ -6,7 +6,7 @@ public class Fridge {
     private String type;
     private int id;
 
-    public Fridge(String name,    String type) {
+    public Fridge(String name,String type) {
         this.name = name;
         this.type = type; }
 

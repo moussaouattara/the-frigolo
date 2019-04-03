@@ -10,6 +10,9 @@ public class FragmentFridgeAdd extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fridgeadd, container, false);
+        if (container != null) {
+            container.removeAllViews();
+        }
+        return inflater.inflate(R.layout.activity_myfridge_add, container, false);
     }
 }
