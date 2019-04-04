@@ -17,7 +17,8 @@ public class FragmentFridgeAddAliment extends android.app.Fragment {
             container.removeAllViews();
         }
         View view = inflater.inflate(R.layout.activity_myfridge_add_aliment, container, false);
-        TextView fname = view.findViewById(R.id.nameOfFridge);
+        TextView fname = view.findViewById(R.id.aliment_add_fname);
+        fname.setText(MainActivity.fname);
 
 
         return view;

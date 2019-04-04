@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goViewFridgeAliment(ArrayList<FTA> ftalist,String name){
 
-
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeAV).commit();
 
         try {
             ArrayList<FTA> isialiment = new ArrayList<FTA>();
@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 BD db = new BD(getAppContext());
                 Fridge fridge = (Fridge) parent.getItemAtPosition(position);
+                MainActivity.fname = fridge.getName();
                 ArrayList<FTA> ftalist = db.getOneFTA(fridge.getName());
                 goViewFridgeAliment(ftalist,fridge.getName());
             }catch (java.lang.NullPointerException e){
