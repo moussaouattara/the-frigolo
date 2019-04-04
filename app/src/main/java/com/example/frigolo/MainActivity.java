@@ -27,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private static FragmentFridgeAdd fFridgeA = new FragmentFridgeAdd();
     private static FragmentFridgeView fFridgeV = new FragmentFridgeView();
     private static FragmentFridgeViewAliment fFridgeAV = new FragmentFridgeViewAliment();
+    private static FragmentFridgeAddAliment fFridgeAA = new FragmentFridgeAddAliment();
 
 
 
-
+    public static  String fname ="";
     private ListView listcontent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -79,16 +80,24 @@ public class MainActivity extends AppCompatActivity {
         return MainActivity.context;
     }
 
-    public void goAddFridge(View view){
-        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeA).commit();
-
+    public void goAddFridgeAliment(View view){
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeAA).commit();
+//        TextView fname = (TextView) findViewById(R.id.nameOfFridge);
+//        TextView fname2 = (TextView) findViewById(R.id.aliment_add_fname);
+//        fname2.setText(fname.getText().toString());
     }
 
-    public void goViewFridgeAliment(ArrayList<FTA> ftalist){
-        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeAV).commit();
+
+    public void goAddFridge(View view){
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fFridgeA).commit();
+    }
+
+    public void goViewFridgeAliment(ArrayList<FTA> ftalist,String name){
+
+
+
         try {
             ArrayList<FTA> isialiment = new ArrayList<FTA>();
-
             this.listcontent=(ListView) findViewById(R.id.listaliment);
             isialiment.clear();
             BD databaseHandler = new BD(MainActivity.getAppContext());
@@ -104,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
     }
 
     AdapterView.OnItemClickListener myhandler = new AdapterView.OnItemClickListener() {
@@ -113,11 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 BD db = new BD(getAppContext());
                 Fridge fridge = (Fridge) parent.getItemAtPosition(position);
                 ArrayList<FTA> ftalist = db.getOneFTA(fridge.getName());
-                goViewFridgeAliment(ftalist);
-                TextView fname = (TextView) findViewById(R.id.aliment_add_fname);
-                fname.setText(fridge.getName());
-
-
+                goViewFridgeAliment(ftalist,fridge.getName());
             }catch (java.lang.NullPointerException e){
 
             }
@@ -175,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 if (db.getOneAliment(aname.getText().toString())==null){
                     db.save(new Aliment(aname.getText().toString(),null,null));
                 }
-                goViewFridgeAliment(db.getOneFTA(fname.getText().toString()));
+                goViewFridgeAliment(db.getOneFTA(fname.getText().toString()),fname.getText().toString());
             }
             catch (SQLiteConstraintException e){
                 Toast.makeText(this,"Aliment Name already pick",Toast.LENGTH_LONG).show();
