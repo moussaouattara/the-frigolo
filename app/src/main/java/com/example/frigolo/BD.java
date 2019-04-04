@@ -60,7 +60,8 @@ public class BD extends SQLiteOpenHelper {
 
     BD(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        this.db = this.getWritableDatabase(); }
+        this.db = this.getWritableDatabase();
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -105,12 +106,14 @@ public class BD extends SQLiteOpenHelper {
         db.execSQL(CREATE_FTA);
         db.execSQL(CREATE_LIST);
         db.execSQL(CREATE_ELEMENT);
-        db.execSQL(CREATE_LTE); }
+        db.execSQL(CREATE_LTE);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(TABLES_DROP);
-        onCreate(db); }
+        onCreate(db);
+    }
 
     public void save(Fridge fridge) {
         try {

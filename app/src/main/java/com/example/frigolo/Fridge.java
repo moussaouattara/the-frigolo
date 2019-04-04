@@ -1,16 +1,22 @@
 package com.example.frigolo;
 
-class Fridge {
+public class Fridge {
 
     private String name;
     private String type;
 
-    Fridge(String name, String type) {
+    public Fridge(String name,String type) {
         this.name = name;
         this.type = type; }
 
-    String getName() {
+    public String getName() {
         return this.name; }
 
-    String getType() {
-        return this.type; }}
+
+    public String getType() {
+        return this.type; }
+
+    public String toString(){
+        return this.name+" : "+this.type;
+    }
+}

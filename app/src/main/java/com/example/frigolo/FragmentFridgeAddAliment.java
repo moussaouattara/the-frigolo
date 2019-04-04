@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class FragmentSetting extends android.app.Fragment{
+import java.util.zip.Inflater;
+
+public class FragmentFridgeAddAliment extends android.app.Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -13,7 +16,11 @@ public class FragmentSetting extends android.app.Fragment{
         if (container != null) {
             container.removeAllViews();
         }
-        return inflater.inflate(R.layout.activity_setting, container, false);
-    }
+        View view = inflater.inflate(R.layout.activity_myfridge_add_aliment, container, false);
+        TextView fname = view.findViewById(R.id.aliment_add_fname);
+        fname.setText(MainActivity.fname);
 
+
+        return view;
+    }
 }

@@ -7,10 +7,17 @@ import android.view.ViewGroup;
 
 public class FragmentFridge extends android.app.Fragment {
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (container != null) {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.activity_myfridge, container, false);
     }
+
+
+
 
 }
