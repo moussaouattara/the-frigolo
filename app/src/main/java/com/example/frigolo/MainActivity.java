@@ -203,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void commingSoon(View view){
+        Toast.makeText(this,"Comming soon",Toast.LENGTH_LONG).show();
+
+    }
+
     public void tampilFridge() {
         // TODO Auto-generated method stub
         try {
