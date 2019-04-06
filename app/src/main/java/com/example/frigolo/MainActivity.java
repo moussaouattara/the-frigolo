@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addAlimentsandfta(View view){
-        EditText aname = (EditText) findViewById(R.id.n);
-        EditText aquantite = (EditText) findViewById(R.id.b);
+        EditText aname = (EditText) findViewById(R.id.aliment_add_name);
+        EditText aquantite = (EditText) findViewById(R.id.aliment_add_quantite);
         EditText adate = (EditText) findViewById(R.id.aliment_add_date);
         TextView fname = (TextView) findViewById(R.id.aliment_add_fname);
 
@@ -176,13 +176,23 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Enter values",Toast.LENGTH_LONG).show();
         }
         else {
+            try{
+                Integer.parseInt(aquantite.getText().toString());
+
+            }catch (NumberFormatException e){
+                Toast.makeText(this,"Quantity should be a number",Toast.LENGTH_LONG).show();
+            }
             try {
                 BD db = new BD(this);
                 db.save(new FTA(fname.getText().toString(),aname.getText().toString(), Integer.parseInt(aquantite.getText().toString()),adate.getText().toString()));
-                if (db.getOneAliment(aname.getText().toString())==null){
+//                if (db.getOneAliment(aname.getText().toString())==null){
                     db.save(new Aliment(aname.getText().toString(),null,null));
-                }
+//                }
+                try{
                 goViewFridgeAliment(db.getOneFTA(fname.getText().toString()),fname.getText().toString());
+                }
+                catch (SQLiteConstraintException e){
+                }
             }
             catch (SQLiteConstraintException e){
                 Toast.makeText(this,"Aliment Name already pick",Toast.LENGTH_LONG).show();
@@ -193,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void commingSoon(View view){
+        Toast.makeText(this,"Comming soon",Toast.LENGTH_LONG).show();
+
+    }
+
     public void tampilFridge() {
         // TODO Auto-generated method stub
         try {
